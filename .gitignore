@@ -9,6 +9,10 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+#IDEA
+.env
+/.idea
+
 # Generated files
 .idea/**/contentModel.xml
 
