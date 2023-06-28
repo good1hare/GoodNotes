@@ -16,8 +16,7 @@ type (
 		Port string
 	}
 	Postgres struct {
-		PostgresUrl     string
-		PostgresMaxPool int
+		PostgresUrl string
 	}
 
 	Logger struct {

@@ -22,20 +22,19 @@ func Run(cfg *configs.Config) {
 	log := logger.New(cfg.Logger.Level)
 
 	////Repository
-	pg, err := postgres.New(cfg.PostgresUrl, postgres.MaxPoolSize(cfg.PostgresMaxPool))
+	pg, err := postgres.New(cfg.PostgresUrl)
 	if err != nil {
 		log.Fatal(fmt.Errorf("app - Run - postgres.New: %w", err))
 	}
-	defer pg.Close()
 
 	// Use case
-	orderUseCase := usecase.New(
+	userUseCase := usecase.New(
 		repo.New(pg),
 	)
 
 	// HTTP Server
 	handler := gin.New()
-	v1.NewRouter(handler, log, orderUseCase)
+	v1.NewRouter(handler, log, userUseCase)
 	httpServer := httpserver.New(handler, httpserver.Port(cfg.Http.Port))
 
 	// Waiting signal

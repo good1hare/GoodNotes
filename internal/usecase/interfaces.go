@@ -9,15 +9,15 @@ import (
 type (
 	// User -
 	User interface {
-		GetUser(context.Context) (entity.User, error)
+		GetUser(context.Context, int) (entity.User, error)
 		CreateUser(context.Context) (entity.User, error)
 		UpdateUser(context.Context) (entity.User, error)
-		DeleteUser(context.Context) error
+		DeleteUser(context.Context, int) error
 	}
 
 	// UserRepo -
 	UserRepo interface {
-		FindUser(context.Context, string) (entity.User, error)
-		SaveUser(context.Context) (entity.User, error)
+		FindUser(context.Context, int) (entity.User, error)
+		SaveUser(context.Context, entity.User) (entity.User, error)
 	}
 )

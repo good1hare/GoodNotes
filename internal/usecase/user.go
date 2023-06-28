@@ -10,7 +10,7 @@ type UserUseCase struct {
 	repo UserRepo
 }
 
-func (o UserUseCase) GetOrder(ctx context.Context, chatId string) (entity.User, error) {
+func (o UserUseCase) GetUser(ctx context.Context, chatId int) (entity.User, error) {
 	order, err := o.repo.FindUser(ctx, chatId)
 	if err != nil {
 		return entity.User{}, err
@@ -18,7 +18,17 @@ func (o UserUseCase) GetOrder(ctx context.Context, chatId string) (entity.User, 
 	return order, nil
 }
 
-func (o UserUseCase) CreateOrder(ctx context.Context) (entity.User, error) {
+func (o UserUseCase) CreateUser(ctx context.Context) (entity.User, error) {
+	e := entity.User{}
+
+	return e, nil
+}
+
+func (o UserUseCase) DeleteUser(ctx context.Context, chatId int) error {
+	return nil
+}
+
+func (o UserUseCase) UpdateUser(ctx context.Context) (entity.User, error) {
 	e := entity.User{}
 
 	return e, nil

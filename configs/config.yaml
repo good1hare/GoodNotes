@@ -5,7 +5,6 @@ Http:
 #     postgres://jack:secret@pg.example.com:5432/mydb?sslmode=verify-ca&pool_max_conns=10
 Postgres:
   PostgresUrl: 'postgres://jack:secret@pg.example.com:5432/mydb?sslmode=verify-ca&pool_max_conns=10'
-  PostgresMaxPool: '10'
 
 Logger:
   Level: 'debug'

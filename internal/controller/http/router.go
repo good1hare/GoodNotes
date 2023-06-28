@@ -10,8 +10,8 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 
 	// Swagger docs.
-	"vprok_order_backend/internal/usecase"
-	"vprok_order_backend/pkg/logger"
+	"MateMind/internal/usecase"
+	"MateMind/pkg/logger"
 )
 
 // NewRouter -.
@@ -21,7 +21,7 @@ import (
 // @version     1.0
 // @host        localhost:8080
 // @BasePath    /v1
-func NewRouter(handler *gin.Engine, log logger.Interface, order usecase.Order) {
+func NewRouter(handler *gin.Engine, log logger.Interface, user usecase.User) {
 	// Options
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
@@ -39,6 +39,6 @@ func NewRouter(handler *gin.Engine, log logger.Interface, order usecase.Order) {
 	// Routers
 	h := handler.Group("/v1")
 	{
-		newOrderRoutes(h, order, log)
+		newOrderRoutes(h, user, log)
 	}
 }
