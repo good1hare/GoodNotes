@@ -37,8 +37,8 @@ func NewRouter(handler *gin.Engine, log logger.Interface, user usecase.User) {
 	handler.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
 	// Routers
-	h := handler.Group("/v1")
+	h := handler.Group("/telegram")
 	{
-		newOrderRoutes(h, user, log)
+		newTelegramRoutes(h, user, log)
 	}
 }
