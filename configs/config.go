@@ -16,7 +16,8 @@ type (
 		Port string
 	}
 	Postgres struct {
-		PostgresUrl string
+		PoolMax int    `env-required:"true" yaml:"pool_max" env:"PG_POOL_MAX"`
+		Url     string `env-required:"true"                 env:"PG_URL"`
 	}
 
 	Logger struct {
