@@ -22,6 +22,10 @@ type (
 	Logger struct {
 		Level string
 	}
+
+	Telegram struct {
+		Token string
+	}
 )
 
 func NewConfig() (*Config, error) {

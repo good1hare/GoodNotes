@@ -8,3 +8,6 @@ Postgres:
 
 Logger:
   Level: 'debug'
+
+Telegram:
+  Token: 'default-token'
