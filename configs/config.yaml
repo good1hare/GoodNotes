@@ -11,4 +11,5 @@ Logger:
   Level: 'debug'
 
 Telegram:
-  Token: 'default-token'
+  Token: '5960953433:AAGl0Yul0tjBg8cZ4cgdQrcWXbqsTWtlEtw'
+  Debug: false

@@ -10,32 +10,47 @@ import (
 	"MateMind/pkg/logger"
 	"MateMind/pkg/postgres"
 	"fmt"
+	"github.com/gin-gonic/gin"
+
+	handler "MateMind/internal/controller/telegramHandler"
+	telegram "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"os"
 	"os/signal"
 	"syscall"
-
-	"github.com/gin-gonic/gin"
 )
 
 // Run creates objects via constructors.
 func Run(cfg *configs.Config) {
 	log := logger.New(cfg.Logger.Level)
 
-	////Repository
+	//Repository
 	pg, err := postgres.New(cfg.Postgres.Url, postgres.MaxPoolSize(cfg.Postgres.PoolMax))
 	if err != nil {
 		log.Fatal(fmt.Errorf("app - Run - postgres.New: %w", err))
 	}
 
-	// Use case
+	//Use case
 	userUseCase := usecase.New(
 		repo.New(pg),
 	)
 
-	// HTTP Server
-	handler := gin.New()
-	v1.NewRouter(handler, log, userUseCase)
-	httpServer := httpserver.New(handler, httpserver.Port(cfg.Http.Port))
+	//Telegram API
+	bot, err := telegram.NewBotAPI(cfg.Telegram.Token)
+	if err != nil {
+		log.Fatal(err)
+	}
+	bot.Debug = cfg.Telegram.Debug
+	log.Info("Authorized on account %s", bot.Self.UserName)
+	u := telegram.NewUpdate(0)
+	u.Timeout = 60
+	updates := bot.GetUpdatesChan(u)
+	for update := range updates {
+		handler.Handle(bot, update, log, userUseCase)
+	}
+	//HTTP Server
+	ginHandler := gin.New()
+	v1.NewRouter(ginHandler)
+	httpServer := httpserver.New(ginHandler, httpserver.Port(cfg.Http.Port))
 
 	// Waiting signal
 	interrupt := make(chan os.Signal, 1)
