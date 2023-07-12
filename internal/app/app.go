@@ -26,11 +26,11 @@ func Run(cfg *configs.Config) {
 	//Repository
 	pg, err := postgres.New(cfg.Postgres.Url, postgres.MaxPoolSize(cfg.Postgres.PoolMax))
 	if err != nil {
-		log.Fatal(fmt.Errorf("app - Run - postgres.New: %w", err))
+		log.Fatal(fmt.Errorf("app - Run - postgres.NewUserUseCase: %w", err))
 	}
 
 	//Use case
-	userUseCase := usecase.New(
+	userUseCase := usecase.NewUserUseCase(
 		repo.New(pg),
 	)
 

@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"MateMind/internal/entity"
-	"context"
 )
 
 // UserUseCase -.
@@ -10,33 +9,31 @@ type UserUseCase struct {
 	repo UserRepo
 }
 
-func (o UserUseCase) GetUser(ctx context.Context, chatId int) (entity.User, error) {
-	order, err := o.repo.FindUser(ctx, chatId)
-	if err != nil {
-		return entity.User{}, err
-	}
-	return order, nil
-}
-
-func (o UserUseCase) CreateUser(ctx context.Context) (entity.User, error) {
-	e := entity.User{}
-
-	return e, nil
-}
-
-func (o UserUseCase) DeleteUser(ctx context.Context, chatId int) error {
-	return nil
-}
-
-func (o UserUseCase) UpdateUser(ctx context.Context) (entity.User, error) {
-	e := entity.User{}
-
-	return e, nil
-}
-
-// New -.
-func New(r UserRepo) *UserUseCase {
+// NewUserUseCase -.
+func NewUserUseCase(r UserRepo) *UserUseCase {
 	return &UserUseCase{
 		repo: r,
 	}
+}
+
+func (u UserUseCase) GetUser(chatId int) (entity.User, error) {
+	user, err := u.repo.FindUser(chatId)
+	if err != nil {
+		return entity.User{}, err
+	}
+	return user, nil
+}
+
+func (u UserUseCase) CreateUser(user entity.User) (entity.User, error) {
+
+	return user, nil
+}
+
+func (u UserUseCase) UpdateUser(user entity.User) (entity.User, error) {
+
+	return user, nil
+}
+
+func (u UserUseCase) DeleteUser(chatId int) error {
+	return nil
 }
