@@ -30,8 +30,9 @@ func Handle(bot *telegram.BotAPI, update telegram.Update, log logger.Interface, 
 	}
 }
 
+// тут ошибка вроде понял что-то не так с конструктором
 func (th *telegramHandler) register() {
-	e := entity.User{UserName: th.update.ChatMember.Chat.UserName, ChatId: th.update.ChatMember.Chat.ID}
+	e := entity.User{Id: uint(th.update.ChatMember.Chat.ID), UserName: th.update.ChatMember.Chat.UserName, ChatId: th.update.ChatMember.Chat.ID}
 
 	e, err := th.userUseCase.CreateUser(e)
 	if err != nil {
