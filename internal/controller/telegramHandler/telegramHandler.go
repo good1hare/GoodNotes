@@ -7,32 +7,39 @@ import (
 	telegram "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-type telegramHandler struct {
+type TelegramHandler struct {
 	bot         *telegram.BotAPI
 	update      telegram.Update
 	log         logger.Interface
 	userUseCase usecase.User
 }
 
-func Handle(bot *telegram.BotAPI, update telegram.Update, log logger.Interface, user usecase.User) {
-	th := &telegramHandler{bot, update, log, user}
+func NewTelegramHandler(bot *telegram.BotAPI, update telegram.Update, log logger.Interface, userUseCase usecase.User) *TelegramHandler {
+	return &TelegramHandler{
+		bot:         bot,
+		update:      update,
+		log:         log,
+		userUseCase: userUseCase,
+	}
+}
 
-	log.Info("[%s] %s", update.Message.From.UserName, update.Message.Text)
+func (th *TelegramHandler) Handle() {
+
+	th.log.Info("[%s] %s", th.update.Message.From.UserName, th.update.Message.Text)
 
 	th.register()
 
-	msg := telegram.NewMessage(update.Message.Chat.ID, update.Message.Text)
-	msg.ReplyToMessageID = update.Message.MessageID
+	msg := telegram.NewMessage(th.update.Message.Chat.ID, th.update.Message.Text)
+	msg.ReplyToMessageID = th.update.Message.MessageID
 
-	_, err := bot.Send(msg)
+	_, err := th.bot.Send(msg)
 	if err != nil {
 		return
 	}
 }
 
-// тут ошибка вроде понял что-то не так с конструктором
-func (th *telegramHandler) register() {
-	e := entity.User{Id: uint(th.update.ChatMember.Chat.ID), UserName: th.update.ChatMember.Chat.UserName, ChatId: th.update.ChatMember.Chat.ID}
+func (th *TelegramHandler) register() {
+	e := entity.User{UserName: th.update.ChatMember.Chat.UserName, ChatId: th.update.ChatMember.Chat.ID}
 
 	e, err := th.userUseCase.CreateUser(e)
 	if err != nil {

@@ -45,7 +45,8 @@ func Run(cfg *configs.Config) {
 	u.Timeout = 60
 	updates := bot.GetUpdatesChan(u)
 	for update := range updates {
-		handler.Handle(bot, update, log, userUseCase)
+		th := handler.NewTelegramHandler(bot, update, log, userUseCase)
+		th.Handle()
 	}
 	//HTTP Server
 	ginHandler := gin.New()
