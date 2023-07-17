@@ -41,7 +41,7 @@ func (th *TelegramHandler) Handle() {
 func (th *TelegramHandler) register() {
 	e := entity.User{UserName: th.update.Message.Chat.UserName, ChatId: th.update.Message.Chat.ID}
 
-	e, err := th.userUseCase.CreateUser(e)
+	_, err := th.userUseCase.CreateUser(e)
 	if err != nil {
 		return
 	}
