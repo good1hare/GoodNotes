@@ -1,4 +1,3 @@
-// Package v1 implements routing paths. Each services in own file.
 package v1
 
 import (
@@ -8,20 +7,16 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-
-	// Swagger docs.
-	"MateMind/internal/usecase"
-	"MateMind/pkg/logger"
 )
 
 // NewRouter -.
 // Swagger spec:
-// @title       Go Clean Template API
+// @title       MateMind API
 // @description Using a translation service as an example
 // @version     1.0
 // @host        localhost:8080
 // @BasePath    /v1
-func NewRouter(handler *gin.Engine, log logger.Interface, user usecase.User) {
+func NewRouter(handler *gin.Engine) {
 	// Options
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
@@ -35,10 +30,4 @@ func NewRouter(handler *gin.Engine, log logger.Interface, user usecase.User) {
 
 	// Prometheus metrics
 	handler.GET("/metrics", gin.WrapH(promhttp.Handler()))
-
-	// Routers
-	h := handler.Group("/telegram")
-	{
-		newTelegramRoutes(h, user, log)
-	}
 }

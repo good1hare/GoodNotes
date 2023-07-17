@@ -4,11 +4,12 @@ Http:
 #     Example URL
 #     postgres://jack:secret@pg.example.com:5432/mydb?sslmode=verify-ca&pool_max_conns=10
 Postgres:
-  Url: 'postgres://jack:secret@pg.example.com:5432/mydb?sslmode=verify-ca&pool_max_conns=10'
+  Url: 'postgres://postgres:password@0.0.0.0:5433/postgres?sslmode=disable&pool_max_conns=10'
   PoolMax: 2
 
 Logger:
   Level: 'debug'
 
 Telegram:
-  Token: 'default-token'
+  Token: '5960953433:AAGl0Yul0tjBg8cZ4cgdQrcWXbqsTWtlEtw'
+  Debug: false

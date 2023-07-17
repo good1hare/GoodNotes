@@ -10,6 +10,7 @@ type (
 		Http
 		Postgres
 		Logger
+		Telegram
 	}
 
 	Http struct {
@@ -26,6 +27,7 @@ type (
 
 	Telegram struct {
 		Token string
+		Debug bool
 	}
 )
 
