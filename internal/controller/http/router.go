@@ -12,7 +12,7 @@ import (
 // NewRouter -.
 // Swagger spec:
 // @title       MateMind API
-// @description Using a translation service as an example
+// @description Using a service for quick notes
 // @version     1.0
 // @host        localhost:8080
 // @BasePath    /v1
