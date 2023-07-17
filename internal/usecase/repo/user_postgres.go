@@ -3,6 +3,7 @@ package repo
 import (
 	"MateMind/internal/entity"
 	"MateMind/pkg/postgres"
+	"context"
 	"errors"
 	"github.com/jackc/pgx/v4"
 )
@@ -17,7 +18,7 @@ func New(pg *postgres.Postgres) *UserRepo {
 
 func (r *UserRepo) FindUser(id int) (entity.User, error) {
 	var user entity.User
-	row := r.Pool.QueryRow(nil, "SELECT * FROM user WHERE id = $1", id)
+	row := r.Pool.QueryRow(context.TODO(), "SELECT * FROM user WHERE id = $1", id)
 	err := row.Scan(&user.Id, &user.UserName, &user.ChatId)
 	if err == pgx.ErrNoRows {
 		return entity.User{}, errors.New("entity not found")
@@ -28,7 +29,7 @@ func (r *UserRepo) FindUser(id int) (entity.User, error) {
 }
 
 func (r *UserRepo) SaveUser(user entity.User) (entity.User, error) {
-	_, err := r.Pool.Exec(nil, "INSERT INTO user (user_name, chat_id) VALUES ($1, $2)",
+	_, err := r.Pool.Exec(context.TODO(), "INSERT INTO user (user_name, chat_id) VALUES ($1, $2)",
 		user.UserName, user.ChatId)
 	if err != nil {
 		return entity.User{}, err
