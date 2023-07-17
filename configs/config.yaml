@@ -4,7 +4,7 @@ Http:
 #     Example URL
 #     postgres://jack:secret@pg.example.com:5432/mydb?sslmode=verify-ca&pool_max_conns=10
 Postgres:
-  Url: 'postgres://postgres:password@0.0.0.0:5432/postgres?sslmode=disable&pool_max_conns=10'
+  Url: 'postgres://postgres:password@0.0.0.0:5433/postgres?sslmode=disable&pool_max_conns=10'
   PoolMax: 2
 
 Logger:
