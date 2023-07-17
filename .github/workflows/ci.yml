@@ -31,6 +31,8 @@ jobs:
         with:
           fail_on_error: true
           reporter: github-pr-review
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   dotenv-linter:
     name: runner / dotenv-linter
