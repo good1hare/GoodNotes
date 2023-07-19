@@ -9,6 +9,6 @@ func (th *TelegramHandler) StartCommand() {
 	msg.Text = "Здравствуйте, буду рад вам помочь!"
 	_, err := th.bot.Send(msg)
 	if err != nil {
-		return
+		th.log.Error(err)
 	}
 }

@@ -15,10 +15,8 @@ func (th *TelegramHandler) DonationCommand() {
 	msg.ReplyMarkup = numericKeyboard
 
 	msg.Text = "Спасибо вам за вклад 💖"
-	//msg.ParseMode = "markdown"
 	_, err := th.bot.Send(msg)
 	if err != nil {
 		th.log.Error(err)
-		return
 	}
 }

@@ -31,10 +31,6 @@ func (th *TelegramHandler) Handle() {
 
 	th.register()
 
-	//if !th.update.Message.IsCommand() { // ignore any non-command Messages
-	//	return
-	//}
-
 	command := th.update.Message.Text
 
 	if th.update.Message.IsCommand() && th.update.Message.Command() == "start" {
@@ -63,7 +59,6 @@ func (th *TelegramHandler) register() {
 	_, err := th.userUseCase.CreateUser(e)
 	if err != nil {
 		th.log.Error(err)
-		return
 	}
 }
 
@@ -89,6 +84,5 @@ func (th *TelegramHandler) DefaultAnswer() {
 	_, err := th.bot.Send(msg)
 	if err != nil {
 		th.log.Error(err)
-		return
 	}
 }

@@ -9,6 +9,6 @@ func (th *TelegramHandler) ReminderCommand() {
 	msg.Text = "Чем могу вам помочь?"
 	_, err := th.bot.Send(msg)
 	if err != nil {
-		return
+		th.log.Error(err)
 	}
 }
