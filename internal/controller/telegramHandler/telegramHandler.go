@@ -38,27 +38,18 @@ func (th *TelegramHandler) Handle() {
 	}
 
 	switch command {
-	case "Быстрая заметка":
+	case "🗒️Быстрая заметка":
 		th.StartCommand()
-	case "Заметка":
+	case "📒Заметка":
 		th.NoteCommand()
-	case "Напоминание":
+	case "🎗️Напоминание":
 		th.ReminderCommand()
-	case "Помощь":
+	case "❓Помощь":
 		th.HelpCommand()
-	case "Разработчику на кофе":
+	case "☕Разработчику на кофе":
 		th.DonationCommand()
 	default:
 		th.DefaultAnswer()
-	}
-}
-
-func (th *TelegramHandler) register() {
-	e := entity.User{UserName: th.update.Message.Chat.UserName, ChatId: th.update.Message.Chat.ID}
-
-	_, err := th.userUseCase.CreateUser(e)
-	if err != nil {
-		th.log.Error(err)
 	}
 }
 
@@ -68,13 +59,13 @@ func (th *TelegramHandler) DefaultAnswer() {
 
 	var defaultKeyboard = telegram.NewReplyKeyboard(
 		telegram.NewKeyboardButtonRow(
-			telegram.NewKeyboardButton("Быстрая заметка"),
-			telegram.NewKeyboardButton("Заметка"),
-			telegram.NewKeyboardButton("Напоминание"),
+			telegram.NewKeyboardButton("🗒️Быстрая заметка"),
+			telegram.NewKeyboardButton("📒Заметка"),
+			telegram.NewKeyboardButton("🎗️Напоминание"),
 		),
 		telegram.NewKeyboardButtonRow(
-			telegram.NewKeyboardButton("Помощь"),
-			telegram.NewKeyboardButton("Разработчику на кофе"),
+			telegram.NewKeyboardButton("❓Помощь"),
+			telegram.NewKeyboardButton("☕Разработчику на кофе"),
 		),
 	)
 
@@ -82,6 +73,15 @@ func (th *TelegramHandler) DefaultAnswer() {
 
 	msg.Text = "Что нужно сделать?"
 	_, err := th.bot.Send(msg)
+	if err != nil {
+		th.log.Error(err)
+	}
+}
+
+func (th *TelegramHandler) register() {
+	e := entity.User{UserName: th.update.Message.Chat.UserName, ChatId: th.update.Message.Chat.ID}
+
+	_, err := th.userUseCase.CreateUser(e)
 	if err != nil {
 		th.log.Error(err)
 	}
