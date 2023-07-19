@@ -17,5 +17,7 @@ type (
 	UserRepo interface {
 		FindUser(int) (entity.User, error)
 		SaveUser(entity.User) (entity.User, error)
+		UpdateUser(entity.User) (entity.User, error)
+		DeleteUser(int) error
 	}
 )

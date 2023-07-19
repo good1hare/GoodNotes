@@ -37,6 +37,19 @@ func (r *UserRepo) SaveUser(user entity.User) (entity.User, error) {
 	return entity.User{}, nil
 }
 
+func (r *UserRepo) UpdateUser(user entity.User) (entity.User, error) {
+	_, err := r.Pool.Exec(context.TODO(), "UPDATE user SET user_name=$1 WHERE chat_id=$2", user.UserName, user.ChatId)
+	if err != nil {
+		return entity.User{}, err
+	}
+	return entity.User{}, nil
+}
+
+func (r *UserRepo) DeleteUser(chatID int) error {
+	_, err := r.Pool.Exec(context.TODO(), "DELETE FROM user WHERE chat_id=$1", chatID)
+	return err
+}
+
 //	r.db.Exec(ctx, "UPDATE user SET user_name = $1, chat_id = $2 WHERE id = $3",
 
 //	r.db.Exec(ctx, "DELETE FROM user WHERE id = $1", id)
