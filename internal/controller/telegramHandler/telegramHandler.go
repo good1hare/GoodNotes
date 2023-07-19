@@ -12,14 +12,16 @@ type TelegramHandler struct {
 	update      telegram.Update
 	log         logger.Interface
 	userUseCase usecase.User
+	donation    string
 }
 
-func NewTelegramHandler(bot *telegram.BotAPI, update telegram.Update, log logger.Interface, userUseCase usecase.User) *TelegramHandler {
+func NewTelegramHandler(bot *telegram.BotAPI, update telegram.Update, log logger.Interface, userUseCase usecase.User, donation string) *TelegramHandler {
 	return &TelegramHandler{
 		bot:         bot,
 		update:      update,
 		log:         log,
 		userUseCase: userUseCase,
+		donation:    donation,
 	}
 }
 
@@ -60,6 +62,7 @@ func (th *TelegramHandler) register() {
 
 	_, err := th.userUseCase.CreateUser(e)
 	if err != nil {
+		th.log.Error(err)
 		return
 	}
 }

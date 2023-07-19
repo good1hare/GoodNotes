@@ -11,6 +11,7 @@ type (
 		Postgres
 		Logger
 		Telegram
+		Links
 	}
 
 	Http struct {
@@ -28,6 +29,10 @@ type (
 	Telegram struct {
 		Token string
 		Debug bool
+	}
+
+	Links struct {
+		Donation string
 	}
 )
 
