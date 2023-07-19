@@ -8,6 +8,7 @@ func (th *TelegramHandler) DonationCommand() {
 	var numericKeyboard = telegram.NewInlineKeyboardMarkup(
 		telegram.NewInlineKeyboardRow(
 			telegram.NewInlineKeyboardButtonURL("Поддержать проект", th.donation),
+			telegram.NewInlineKeyboardButtonURL("Проект на GitHub", th.gitHub),
 		),
 	)
 	msg.ReplyMarkup = numericKeyboard

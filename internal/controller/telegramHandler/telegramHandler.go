@@ -13,15 +13,17 @@ type TelegramHandler struct {
 	log         logger.Interface
 	userUseCase usecase.User
 	donation    string
+	gitHub      string
 }
 
-func NewTelegramHandler(bot *telegram.BotAPI, update telegram.Update, log logger.Interface, userUseCase usecase.User, donation string) *TelegramHandler {
+func NewTelegramHandler(bot *telegram.BotAPI, update telegram.Update, log logger.Interface, userUseCase usecase.User, donation string, gitHub string) *TelegramHandler {
 	return &TelegramHandler{
 		bot:         bot,
 		update:      update,
 		log:         log,
 		userUseCase: userUseCase,
 		donation:    donation,
+		gitHub:      gitHub,
 	}
 }
 

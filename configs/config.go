@@ -33,6 +33,7 @@ type (
 
 	Links struct {
 		Donation string
+		GitHub   string
 	}
 )
 
