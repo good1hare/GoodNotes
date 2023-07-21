@@ -12,7 +12,7 @@ type UserRepo struct {
 	*postgres.Postgres
 }
 
-func New(pg *postgres.Postgres) *UserRepo {
+func NewUserRepo(pg *postgres.Postgres) *UserRepo {
 	return &UserRepo{pg}
 }
 
@@ -50,7 +50,3 @@ func (r *UserRepo) DeleteUser(chatID int) error {
 	_, err := r.Pool.Exec(context.TODO(), "DELETE FROM users WHERE chat_id=$1", chatID)
 	return err
 }
-
-//	r.db.Exec(ctx, "UPDATE user SET user_name = $1, chat_id = $2 WHERE id = $3",
-
-//	r.db.Exec(ctx, "DELETE FROM user WHERE id = $1", id)

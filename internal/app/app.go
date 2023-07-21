@@ -31,7 +31,7 @@ func Run(cfg *configs.Config) {
 
 	//Use case
 	userUseCase := usecase.NewUserUseCase(
-		repo.New(pg),
+		repo.NewUserRepo(pg),
 	)
 
 	//Telegram API
