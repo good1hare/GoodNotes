@@ -40,16 +40,24 @@ func (th *TelegramHandler) Handle() {
 	}
 
 	switch command {
-	case "🗒️Быстрая заметка":
+	case "/start":
 		th.StartCommand()
+
+	case "🗒️Быстрая заметка":
+		th.QuickNoteCommand()
+
 	case "📒Заметка":
 		th.NoteCommand()
+
 	case "🎗️Напоминание":
 		th.ReminderCommand()
+
 	case "❓Помощь":
 		th.HelpCommand()
+
 	case "☕Разработчику на кофе":
 		th.DonationCommand()
+
 	default:
 		th.DefaultAnswer()
 	}
