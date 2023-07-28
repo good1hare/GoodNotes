@@ -4,12 +4,10 @@ import (
 	"MateMind/internal/entity"
 )
 
-// UserUseCase -.
 type UserUseCase struct {
 	repo UserRepo
 }
 
-// NewUserUseCase -.
 func NewUserUseCase(r UserRepo) *UserUseCase {
 	return &UserUseCase{
 		repo: r,
