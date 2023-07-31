@@ -58,9 +58,14 @@ func (th *TelegramHandler) Handle() {
 	case "❓Помощь":
 		th.HelpCommand()
 
+	case "⚙️Настройки":
+		th.SettingsNoteCommand()
+
 	case "☕Разработчику на кофе":
 		th.DonationCommand()
+
 	case secretCommand:
+		th.SecretNoteCommand()
 
 	default:
 		th.DefaultAnswer()
