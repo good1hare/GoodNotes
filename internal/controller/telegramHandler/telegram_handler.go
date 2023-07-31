@@ -75,6 +75,7 @@ func (th *TelegramHandler) DefaultAnswer() {
 		),
 		telegram.NewKeyboardButtonRow(
 			telegram.NewKeyboardButton("❓Помощь"),
+			telegram.NewKeyboardButton("⚙️Настройки"),
 			telegram.NewKeyboardButton("☕Разработчику на кофе"),
 		),
 	)

@@ -6,7 +6,7 @@ func (th *TelegramHandler) ReminderCommand() {
 	msg := telegram.NewMessage(th.update.Message.Chat.ID, "")
 	msg.ReplyToMessageID = th.update.Message.MessageID
 
-	msg.Text = "Чем могу вам помочь?"
+	msg.Text = "Функция еще в разработке👨‍💻"
 	_, err := th.bot.Send(msg)
 	if err != nil {
 		th.log.Error(err)
