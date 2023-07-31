@@ -39,6 +39,9 @@ func (th *TelegramHandler) Handle() {
 		th.StartCommand()
 	}
 
+	//get secret command from redis
+	secretCommand := "secret"
+
 	switch command {
 	case "/start":
 		th.StartCommand()
@@ -57,6 +60,7 @@ func (th *TelegramHandler) Handle() {
 
 	case "☕Разработчику на кофе":
 		th.DonationCommand()
+	case secretCommand:
 
 	default:
 		th.DefaultAnswer()
