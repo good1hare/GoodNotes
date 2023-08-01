@@ -11,4 +11,5 @@ func (th *TelegramHandler) SecretNoteCommand() {
 	if err != nil {
 		th.log.Error(err)
 	}
+	//Обязательно нужно добавить чтобы сообщения удалялись автоматом через минуту
 }
