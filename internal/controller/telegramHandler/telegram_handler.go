@@ -35,10 +35,6 @@ func (th *TelegramHandler) Handle() {
 
 	command := th.update.Message.Text
 
-	if th.update.Message.IsCommand() && th.update.Message.Command() == "start" {
-		th.StartCommand()
-	}
-
 	//get secret command from redis
 	secretCommand := "secret"
 
@@ -99,7 +95,13 @@ func (th *TelegramHandler) DefaultAnswer() {
 }
 
 func (th *TelegramHandler) register() {
-	e := entity.User{UserName: th.update.Message.Chat.UserName, ChatId: th.update.Message.Chat.ID}
+	e := entity.User{
+		UserName:     th.update.Message.Chat.UserName,
+		ChatId:       th.update.Message.Chat.ID,
+		FirstName:    th.update.Message.From.FirstName,
+		LastName:     th.update.Message.From.LastName,
+		LanguageCode: th.update.Message.From.LanguageCode,
+	}
 
 	_, err := th.userUseCase.CreateUser(e)
 	if err != nil {
