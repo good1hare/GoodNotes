@@ -11,3 +11,7 @@ Logger:
 Telegram:
   Token: '5960953433:AAGl0Yul0tjBg8cZ4cgdQrcWXbqsTWtlEtw'
   Debug: false
+
+Links:
+  Donation: https://www.buymeacoffee.com/nick_name
+  GitHub: https://github.com/good1hare/MateMind

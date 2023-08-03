@@ -4,36 +4,44 @@ import (
 	"MateMind/internal/entity"
 )
 
-// UserUseCase -.
 type UserUseCase struct {
 	repo UserRepo
 }
 
-// NewUserUseCase -.
 func NewUserUseCase(r UserRepo) *UserUseCase {
 	return &UserUseCase{
 		repo: r,
 	}
 }
 
-func (u UserUseCase) GetUser(chatId int) (entity.User, error) {
-	user, err := u.repo.FindUser(chatId)
+func (u *UserUseCase) GetUser(chatID int) (entity.User, error) {
+	user, err := u.repo.FindUser(chatID)
 	if err != nil {
 		return entity.User{}, err
 	}
 	return user, nil
 }
 
-func (u UserUseCase) CreateUser(user entity.User) (entity.User, error) {
-
+func (u *UserUseCase) CreateUser(user entity.User) (entity.User, error) {
+	user, err := u.repo.SaveUser(user)
+	if err != nil {
+		return user, err
+	}
 	return user, nil
 }
 
-func (u UserUseCase) UpdateUser(user entity.User) (entity.User, error) {
-
+func (u *UserUseCase) UpdateUser(user entity.User) (entity.User, error) {
+	user, err := u.repo.UpdateUser(user)
+	if err != nil {
+		return entity.User{}, err
+	}
 	return user, nil
 }
 
-func (u UserUseCase) DeleteUser(chatId int) error {
+func (u *UserUseCase) DeleteUser(chatID int) error {
+	err := u.repo.DeleteUser(chatID)
+	if err != nil {
+		return err
+	}
 	return nil
 }

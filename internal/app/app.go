@@ -31,7 +31,7 @@ func Run(cfg *configs.Config) {
 
 	//Use case
 	userUseCase := usecase.NewUserUseCase(
-		repo.New(pg),
+		repo.NewUserRepo(pg),
 	)
 
 	//Telegram API
@@ -45,7 +45,7 @@ func Run(cfg *configs.Config) {
 	u.Timeout = 60
 	updates := bot.GetUpdatesChan(u)
 	for update := range updates {
-		th := handler.NewTelegramHandler(bot, update, log, userUseCase)
+		th := handler.NewTelegramHandler(bot, update, log, userUseCase, cfg.Links.Donation, cfg.Links.GitHub)
 		th.Handle()
 	}
 	//HTTP Server
