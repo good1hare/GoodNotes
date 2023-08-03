@@ -30,8 +30,8 @@ func (r *UserRepo) FindUser(id int) (entity.User, error) {
 
 func (r *UserRepo) SaveUser(user entity.User) (entity.User, error) {
 	_, err := r.Pool.Exec(context.TODO(),
-		"INSERT INTO users (user_name, chat_id) VALUES ($1, $2) ON CONFLICT (chat_id) DO UPDATE SET user_name = excluded.user_name",
-		user.UserName, user.ChatId)
+		"INSERT INTO users (user_name, chat_id, first_name, last_name, language_code) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (user_id) DO UPDATE SET user_name = excluded.user_name",
+		user.UserName, user.ChatId, user.FirstName, user.LastName, user.LanguageCode)
 	if err != nil {
 		return entity.User{}, err
 	}
