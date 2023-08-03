@@ -5,3 +5,7 @@ migrate-create:  ### create new migration
 migrate-up: ### migration up
 	migrate -path migrations -database 'postgres://postgres:password@0.0.0.0:5433/postgres?sslmode=disable' up
 .PHONY: migrate-up
+
+migrate-down: ### migration down
+	migrate -path migrations -database 'postgres://postgres:password@0.0.0.0:5433/postgres?sslmode=disable' down
+.PHONY: migrate-down
