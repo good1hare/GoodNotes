@@ -4,7 +4,7 @@ on: pull_request
 jobs:
   codecov:
     name: runner / codecov
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Upload coverage reports to Codecov
@@ -13,7 +13,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   golangci-lint:
     name: runner / golang-ci-lint
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
 
   yamllint:
     name: runner / yaml-lint
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: reviewdog/action-yamllint@v1
@@ -33,7 +33,7 @@ jobs:
 
   dotenv-linter:
     name: runner / dotenv-linter
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: dotenv-linter/action-dotenv-linter@v2
@@ -42,7 +42,7 @@ jobs:
 
   check-dependencies:
     name: runner / check-dependencies
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v4
