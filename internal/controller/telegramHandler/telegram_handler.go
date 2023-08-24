@@ -83,6 +83,10 @@ func (th *TelegramHandler) DefaultAnswer() {
 			telegram.NewKeyboardButton("⚙️Настройки"),
 			telegram.NewKeyboardButton("☕Разработчику на кофе"),
 		),
+		telegram.NewKeyboardButtonRow(
+			telegram.NewKeyboardButton("🔐Секретная заметка"),
+		),
+		//Отправить описание серкетной заметки и предложить назначить секретное слово для создания секретной заметки
 	)
 
 	msg.ReplyMarkup = defaultKeyboard
